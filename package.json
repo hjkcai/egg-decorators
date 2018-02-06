@@ -12,7 +12,11 @@
     "eggPlugin",
     "egg-plugin"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "@types/lodash": "^4.14.101",
+    "lodash": "^4.17.5",
+    "tslib": "^1.9.0"
+  },
   "devDependencies": {
     "egg": "^2.3.0",
     "egg-bin": "^4.3.7",

@@ -79,6 +79,10 @@
     "@types/koa-compose" "*"
     "@types/node" "*"
 
+"@types/lodash@^4.14.101":
+  version "4.14.101"
+  resolved "http://registry.npm.taobao.org/@types/lodash/download/@types/lodash-4.14.101.tgz#512f6c9e1749890f4d024e98cb995a63f562d458"
+
 "@types/mime@*":
   version "2.0.0"
   resolved "http://registry.npm.taobao.org/@types/mime/download/@types/mime-2.0.0.tgz#5a7306e367c539b9f6543499de8dd519fac37a8b"
@@ -2664,7 +2668,7 @@ locate-path@^2.0.0:
     p-locate "^2.0.0"
     path-exists "^3.0.0"
 
-lodash@^4.17.4:
+lodash@^4.17.4, lodash@^4.17.5:
   version "4.17.5"
   resolved "http://registry.npm.taobao.org/lodash/download/lodash-4.17.5.tgz#99a92d65c0272debe8c96b6057bc8fbfa3bed511"
 
@@ -3821,6 +3825,10 @@ traverse@^0.6.6:
 trim-right@^1.0.1:
   version "1.0.1"
   resolved "http://registry.npm.taobao.org/trim-right/download/trim-right-1.0.1.tgz#cb2e1203067e0c8de1f614094b9fe45704ea6003"
+
+tslib@^1.9.0:
+  version "1.9.0"
+  resolved "http://registry.npm.taobao.org/tslib/download/tslib-1.9.0.tgz#e37a86fda8cbbaf23a057f473c9f4dc64e5fc2e8"
 
 tsscmp@1.0.5:
   version "1.0.5"
