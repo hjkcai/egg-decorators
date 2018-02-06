@@ -1,0 +1,12 @@
+{
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/.DS_Store": true,
+    "**/*.js": { "when": "$(basename).ts" },
+    "**/*.js.map": { "when": "$(basename)" },
+    "**/*.jsx": { "when": "$(basename).tsx" },
+    "**/*.jsx.map": { "when": "$(basename)" }
+  }
+}
