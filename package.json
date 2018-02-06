@@ -1,0 +1,41 @@
+{
+  "name": "egg-decorators",
+  "version": "1.0.0",
+  "description": "Decorators for egg.js",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "eggPlugin": {
+    "name": "decorators"
+  },
+  "keywords": [
+    "egg",
+    "eggPlugin",
+    "egg-plugin"
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "egg": "^2.3.0",
+    "egg-bin": "^4.3.7",
+    "typescript": "^2.7.1"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "scripts": {
+    "test": "egg-bin test"
+  },
+  "files": [
+    "app.js",
+    "lib/*.js"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hjkcai/egg-decorators.git"
+  },
+  "bugs": {
+    "url": "https://github.com/hjkcai/egg/issues"
+  },
+  "homepage": "https://github.com/hjkcai/egg-decorators#readme",
+  "author": "Jingkun Hua<huajingkun1214@gmail.com>",
+  "license": "MIT"
+}
