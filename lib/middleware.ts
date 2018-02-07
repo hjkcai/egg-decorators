@@ -1,4 +1,6 @@
-import { IMiddleware } from 'koa-router'
+import { Context } from 'egg'
+
+export type IMiddleware = (ctx: Context, next: () => Promise<any>) => Promise<any>
 
 export function Middleware (middleware: IMiddleware, name: string = middleware.name): MethodDecorator {
   return function MiddlewareDecorator (target, key) {
