@@ -7,6 +7,7 @@ type HttpMethod = 'get' | 'put' | 'post' | 'patch' | 'delete'
 
 type RouteTable = RouteTableEntry[]
 interface RouteTableEntry {
+  key: string,
   method: HttpMethod,
   path: string | RegExp,
   middlewares: any[],
@@ -16,16 +17,13 @@ interface RouteTableEntry {
 function generateRouteDecorator (method: HttpMethod) {
   return function RouteDecoratorFactory (path: string | RegExp, name?: string) {
     return function RouteDecorator (target: any, key: string) {
-      const func = target[key]
-      const { app } = store
       const routeTable: RouteTable = target[ROUTE_TABLE] || (target[ROUTE_TABLE] = [])
-      const baseMiddleware = _.get(app, target.pathName)[key]
-
       routeTable.push({
+        key,
         name,
         path,
         method,
-        middlewares: (func.middlewares || []).concat([baseMiddleware])
+        middlewares: target[key].middlewares || []
       })
     }
   }
@@ -37,7 +35,10 @@ export function Router (target: any) {
 
   app.beforeStart(() => {
     for (const entry of routeTable) {
-      const args: any[] = [entry.path, ...entry.middlewares]
+      const func = target.prototype[entry.key]
+      const baseMiddleware = _.get(app, target.prototype.pathName)[entry.key]
+
+      const args: any[] = [entry.path, ...entry.middlewares, baseMiddleware]
       if (entry.name) {
         args.unshift(entry.name)
       }
