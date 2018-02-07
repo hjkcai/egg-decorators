@@ -43,7 +43,7 @@ function RoutesDecoratorFactory (prefix: string = '/'): ClassDecorator {
         const commonMiddlewares = (target.middlewares || []).reverse()
 
         const args: any[] = [
-          path.posix.join(prefix, entry.path),
+          path.posix.join('/', prefix, entry.path),
           ...commonMiddlewares,
           ...localMiddlewares,
           baseMiddleware
