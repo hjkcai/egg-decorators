@@ -37,9 +37,16 @@ export function Routes (target: any) {
     for (const entry of routeTable) {
       const func = target.prototype[entry.key]
       const baseMiddleware = _.get(app, target.prototype.pathName)[entry.key]
-      const commonMiddlewares = target.middlewares || []
+      const localMiddlewares = entry.middlewares.reverse()
+      const commonMiddlewares = (target.middlewares || []).reverse()
 
-      const args: any[] = [entry.path, ...commonMiddlewares, ...entry.middlewares, baseMiddleware]
+      const args: any[] = [
+        entry.path,
+        ...commonMiddlewares,
+        ...localMiddlewares,
+        baseMiddleware
+      ]
+
       if (entry.name) {
         args.unshift(entry.name)
       }
