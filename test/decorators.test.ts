@@ -23,8 +23,7 @@ describe('egg-decorators', () => {
     for (const method of ['get', 'post', 'put', 'patch', 'delete']) {
       it(`${method.toUpperCase()} /methods/test`, () => {
         app.mockCsrf()
-        return app.httpRequest()
-          [method]('/methods/test')
+        return app.httpRequest()[method]('/methods/test')
           .expect(method)
           .expect(200)
       })
