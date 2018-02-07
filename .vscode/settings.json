@@ -4,6 +4,7 @@
     "**/.svn": true,
     "**/.hg": true,
     "**/.DS_Store": true,
+    "**/*.d.ts": { "when": "$(basename).ts" },
     "**/*.js": { "when": "$(basename).ts" },
     "**/*.js.map": { "when": "$(basename)" },
     "**/*.jsx": { "when": "$(basename).tsx" },
