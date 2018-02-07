@@ -24,6 +24,50 @@ describe('egg-decorators', () => {
     }
   })
 
+  describe('middlewares', () => {
+    it('global middlewares', () => {
+      return app.httpRequest()
+        .get('/middlewares/global')
+        .expect({
+          global: true,
+          handler: true
+        })
+    })
+
+    it('local middlewares', () => {
+      return app.httpRequest()
+        .get('/middlewares/local')
+        .expect({
+          global: true,
+          handler: true,
+          local: true
+        })
+    })
+
+    it('multiple local middlewares', () => {
+      return app.httpRequest()
+        .get('/middlewares/multi')
+        .expect({
+          global: true,
+          handler: true,
+          local: true,
+          multi: true
+        })
+    })
+
+    it('custom decorator as middlewares', () => {
+      return app.httpRequest()
+        .get('/middlewares/custom')
+        .expect({
+          global: true,
+          handler: true,
+          local: true,
+          multi: true,
+          custom: true
+        })
+    })
+  })
+
   describe('common mistakes', () => {
     it('should not register any routes when missing @Routes', () => {
       return app.httpRequest()
