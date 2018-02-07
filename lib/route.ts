@@ -46,8 +46,8 @@ function RoutesDecoratorFactory (prefix: string = '/'): ClassDecorator {
         const baseMiddleware = _.get(app, target.prototype.pathName)[entry.key]
 
         // Combine all middlewares from the route itself and the controller
-        const localMiddlewares = entry.middlewares.reverse()
-        const commonMiddlewares = (target.middlewares || []).reverse()
+        const localMiddlewares = entry.middlewares
+        const commonMiddlewares = target.middlewares || []
 
         const args: any[] = [
           path.posix.join('/', prefix, entry.path),
