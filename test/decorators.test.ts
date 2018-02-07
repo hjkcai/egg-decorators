@@ -1,7 +1,7 @@
 import { Application, Context } from 'egg'
 import mock, { BaseMockApplication } from 'egg-mock'
 
-describe('test/decorators.test.js', () => {
+describe('egg-decorators', () => {
   let app: BaseMockApplication<Application, Context>
 
   before(() => {
@@ -12,10 +12,15 @@ describe('test/decorators.test.js', () => {
   after(() => app.close())
   afterEach(mock.restore)
 
-  it('should GET /', () => {
-    return app.httpRequest()
-      .get('/')
-      .expect('hi, decorators')
-      .expect(200)
+  describe('basic http method decorators', () => {
+    for (const method of ['get', 'post', 'put', 'patch', 'delete']) {
+      it(`${method.toUpperCase()} /methods/test`, () => {
+        app.mockCsrf()
+        return app.httpRequest()
+          [method]('/methods/test')
+          .expect(method)
+          .expect(200)
+      })
+    }
   })
 })
