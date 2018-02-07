@@ -1,29 +1,51 @@
 import * as _ from 'lodash'
 import { store } from './store'
 
-function generateRouteDecorator (method: 'get' | 'put' | 'post' | 'patch' | 'delete' | 'del') {
-  return function RouteDecoratorFactory (path: string | RegExp, routeName?: string) {
+const ROUTE_TABLE = Symbol('egg-decorator#routeTable')
+
+type HttpMethod = 'get' | 'put' | 'post' | 'patch' | 'delete'
+
+type RouteTable = RouteTableEntry[]
+interface RouteTableEntry {
+  method: HttpMethod,
+  path: string | RegExp,
+  middlewares: any[],
+  name?: string
+}
+
+function generateRouteDecorator (method: HttpMethod) {
+  return function RouteDecoratorFactory (path: string | RegExp, name?: string) {
     return function RouteDecorator (target: any, key: string) {
       const func = target[key]
-      func.routeName = routeName
-
       const { app } = store
-      app.beforeStart(() => {
-        const baseMiddleware = _.get(app, target.pathName)[key]
-        if (baseMiddleware) {
-          const additionalMiddlewares = func.middlewares || []
-          const args: any[] = [path, ...additionalMiddlewares, baseMiddleware]
+      const routeTable: RouteTable = target[ROUTE_TABLE] || (target[ROUTE_TABLE] = [])
+      const baseMiddleware = _.get(app, target.pathName)[key]
 
-          if (routeName) {
-            args.unshift(routeName)
-          }
-
-          // @ts-ignore
-          app.router[method](...args)
-        }
+      routeTable.push({
+        name,
+        path,
+        method,
+        middlewares: (func.middlewares || []).concat([baseMiddleware])
       })
     }
   }
+}
+
+export function Router (target: any) {
+  const { app } = store
+  const routeTable: RouteTable = target.prototype[ROUTE_TABLE] || []
+
+  app.beforeStart(() => {
+    for (const entry of routeTable) {
+      const args: any[] = [entry.path, ...entry.middlewares]
+      if (entry.name) {
+        args.unshift(entry.name)
+      }
+
+      // @ts-ignore
+      app.router[entry.method](...args)
+    }
+  })
 }
 
 export const Get = generateRouteDecorator('get')
