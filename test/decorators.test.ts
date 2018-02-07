@@ -23,4 +23,12 @@ describe('egg-decorators', () => {
       })
     }
   })
+
+  describe('common mistakes', () => {
+    it('should not register any routes when missing @Routes', () => {
+      return app.httpRequest()
+        .get('/bad')
+        .expect(404)
+    })
+  })
 })
