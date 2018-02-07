@@ -39,9 +39,13 @@ function RoutesDecoratorFactory (prefix: string = '/'): ClassDecorator {
     const { app } = store
     const routeTable: RouteTable = target.prototype[ROUTE_TABLE] || []
 
+    // Register all routes in the route table into the app before it starts
     app.beforeStart(() => {
       for (const entry of routeTable) {
+        // Get the original middleware from egg
         const baseMiddleware = _.get(app, target.prototype.pathName)[entry.key]
+
+        // Combine all middlewares from the route itself and the controller
         const localMiddlewares = entry.middlewares.reverse()
         const commonMiddlewares = (target.middlewares || []).reverse()
 
@@ -57,6 +61,7 @@ function RoutesDecoratorFactory (prefix: string = '/'): ClassDecorator {
         }
 
         // @ts-ignore
+        // Register route into the app
         app.router[entry.method](...args)
       }
     })
