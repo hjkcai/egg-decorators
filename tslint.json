@@ -1,0 +1,19 @@
+{
+  "defaultSeverity": "error",
+  "extends": [
+    "tslint-config-standard"
+  ],
+  "jsRules": {},
+  "rules": {
+    "radix": false,
+    "prefer-const": [true, {"destructuring": "all"}],
+    "prefer-for-of": true,
+    "prefer-method-signature": true,
+    "no-unused-expression": false,
+    "no-floating-promises": false,
+    "triple-equals": [true, "allow-null-check"],
+    "strict-type-predicates": false,
+    "unified-signatures": false
+  },
+  "rulesDirectory": []
+}

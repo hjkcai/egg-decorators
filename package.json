@@ -23,6 +23,8 @@
     "egg-bin": "^4.3.7",
     "egg-mock": "^3.14.0",
     "rimraf": "^2.6.2",
+    "tslint": "^5.9.1",
+    "tslint-config-standard": "^7.0.0",
     "typescript": "^2.7.1"
   },
   "engines": {
@@ -31,6 +33,7 @@
   "scripts": {
     "build": "tsc -p .",
     "clean": "rimraf app/**/*.{js,map} test/**/*.{js,map}",
+    "lint": "tslint -p .",
     "test": "egg-bin test"
   },
   "files": [
