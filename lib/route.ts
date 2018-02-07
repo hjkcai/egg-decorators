@@ -37,7 +37,6 @@ function RoutesDecoratorFactory (prefix: string = '/'): ClassDecorator {
 
     app.beforeStart(() => {
       for (const entry of routeTable) {
-        const func = target.prototype[entry.key]
         const baseMiddleware = _.get(app, target.prototype.pathName)[entry.key]
         const localMiddlewares = entry.middlewares.reverse()
         const commonMiddlewares = (target.middlewares || []).reverse()
