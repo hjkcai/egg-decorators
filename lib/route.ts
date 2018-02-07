@@ -37,8 +37,9 @@ export function Router (target: any) {
     for (const entry of routeTable) {
       const func = target.prototype[entry.key]
       const baseMiddleware = _.get(app, target.prototype.pathName)[entry.key]
+      const commonMiddlewares = target.middlewares || []
 
-      const args: any[] = [entry.path, ...entry.middlewares, baseMiddleware]
+      const args: any[] = [entry.path, ...commonMiddlewares, ...entry.middlewares, baseMiddleware]
       if (entry.name) {
         args.unshift(entry.name)
       }
