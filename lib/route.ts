@@ -49,3 +49,7 @@ export function Router (target: any) {
 }
 
 export const Get = generateRouteDecorator('get')
+export const Post = generateRouteDecorator('post')
+export const Put = generateRouteDecorator('put')
+export const Patch = generateRouteDecorator('patch')
+export const Delete = generateRouteDecorator('delete')
