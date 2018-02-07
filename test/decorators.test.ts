@@ -12,6 +12,13 @@ describe('egg-decorators', () => {
   after(() => app.close())
   afterEach(mock.restore)
 
+  it('can prefix a controller via @Routes(prefix)', () => {
+    return app.httpRequest()
+      .get('/prefix/something')
+      .expect('prefixed')
+      .expect(200)
+  })
+
   describe('basic http method decorators', () => {
     for (const method of ['get', 'post', 'put', 'patch', 'delete']) {
       it(`${method.toUpperCase()} /methods/test`, () => {
