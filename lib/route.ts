@@ -18,14 +18,18 @@ interface RouteTableEntry {
 function generateRouteDecorator (method: HttpMethod) {
   return function RouteDecoratorFactory (path: string | RegExp, name?: string) {
     return function RouteDecorator (target: any, key: string) {
+      // All routes will be stored in the route table
+      // at class.prototype[ROUTE_TABLE]
       const routeTable: RouteTable = target[ROUTE_TABLE] || (target[ROUTE_TABLE] = [])
-      routeTable.push({
-        key,
-        name,
-        path,
-        method,
-        middlewares: target[key].middlewares || []
-      })
+
+      // Inject an array at method.middlewares for easier middlewares' modification
+      const middlewares = target[key].middlewares || (target[key].middlewares = [])
+
+      if (routeTable.find(x => x.path === path && x.method === method)) {
+        store.app.logger.warn('[egg-decorators]', 'route', method.toUpperCase(), path.toString(), 'is registered multiple times')
+      }
+
+      routeTable.push({ key, name, path, method, middlewares })
     }
   }
 }
