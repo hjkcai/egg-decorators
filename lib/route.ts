@@ -29,7 +29,7 @@ function generateRouteDecorator (method: HttpMethod) {
   }
 }
 
-export function Router (target: any) {
+export function Routes (target: any) {
   const { app } = store
   const routeTable: RouteTable = target.prototype[ROUTE_TABLE] || []
 
