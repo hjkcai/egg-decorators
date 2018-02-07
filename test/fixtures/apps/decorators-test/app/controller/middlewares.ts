@@ -6,6 +6,11 @@ const Custom = createDecorator(async (ctx, next) => {
   return next()
 })
 
+const Nth = (n: number) => createDecorator(async (ctx, next) => {
+  (ctx.body.ordering || (ctx.body.ordering = [])).push(n)
+  return next()
+})
+
 @Routes
 @Middleware(async (ctx, next) => {
   ctx.body = {}
@@ -51,6 +56,16 @@ export default class MiddlewaresController extends Controller {
     ctx.body.multi = true
   })
   async customMiddleware () {
+    this.ctx.body.handler = true
+  }
+
+  @Get('/middlewares/order')
+  @Nth(1)
+  @Nth(2)
+  @Nth(3)
+  @Nth(4)
+  @Nth(5)
+  async orderMiddleware () {
     this.ctx.body.handler = true
   }
 }

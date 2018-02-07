@@ -66,6 +66,16 @@ describe('egg-decorators', () => {
           custom: true
         })
     })
+
+    it('should have correct middleware ordering', () => {
+      return app.httpRequest()
+        .get('/middlewares/order')
+        .expect({
+          global: true,
+          handler: true,
+          ordering: [1, 2, 3, 4, 5]
+        })
+    })
   })
 
   describe('common mistakes', () => {
