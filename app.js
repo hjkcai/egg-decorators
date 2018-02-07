@@ -1,3 +1,3 @@
 module.exports = function EggDecoratorsBootstrap (application) {
-  require('./lib/app').app = application
+  require('./lib/store').app = application
 }
