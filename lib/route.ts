@@ -14,11 +14,7 @@ function generateRouteDecorator (method: HttpMethod) {
       // Inject an array at method.middlewares for easier middlewares' modification
       const middlewares = target[key].middlewares || (target[key].middlewares = [])
 
-      if (routeTable.has(key)) {
-        store.app.logger.warn('[egg-decorators]', 'You have multiple @Route on', `${target.constructor.name}.${key}`)
-      } else {
-        routeTable.set(key, { key, name, path, method, middlewares })
-      }
+      routeTable.push({ key, name, path, method, middlewares })
     }
   }
 }
@@ -31,7 +27,7 @@ function RoutesDecoratorFactory (prefix: string = '/'): ClassDecorator {
 
     // Register all routes in the route table into the app before it starts
     app.beforeStart(() => {
-      for (const entry of routeTable.values()) {
+      for (const entry of routeTable) {
         // Get the original middleware from egg
         const baseMiddleware = _.get(app, target.prototype.pathName)[entry.key]
 

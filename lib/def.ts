@@ -4,7 +4,7 @@ export const ROUTE_TABLE = Symbol('egg-decorator#routeTable')
 
 export type HttpMethod = 'get' | 'put' | 'post' | 'patch' | 'delete'
 
-export type RouteTable = Map<string | symbol, RouteTableEntry>
+export type RouteTable = RouteTableEntry[]
 export interface RouteTableEntry {
   key: string,
   method: HttpMethod,
