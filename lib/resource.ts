@@ -3,6 +3,7 @@
 import * as path from 'path'
 import * as decorators from './route'
 import * as inflection from 'inflection'
+import { RouteTable, ROUTE_TABLE } from './def'
 
 type RestMap = { [key: string]: RestMapEntry }
 interface RestMapEntry {
@@ -57,7 +58,7 @@ const LAST_WORD_BLACKLIST = ['controller', 'router', 'routes']
 function ResourceDecoratorFactory (prefix: string = '/', name: string | null = ''): ClassDecorator {
   return function ResourceDecorator (target) {
     if (name == null) {
-      // set name to null to disable auto name suffix
+      // set name to null to disable auto name prefix
       name = ''
     } else if (!name) {
       // Auto-detect resource name from the controller's name
@@ -86,11 +87,16 @@ function ResourceDecoratorFactory (prefix: string = '/', name: string | null = '
         formatedName = opts.namePrefix + formatedName
       }
 
-      // Use the existing decorators to register routes
+      // Skip if user defines the route manually
+      const routeTable: RouteTable = target.prototype[ROUTE_TABLE]
+      if (routeTable.find(entry => entry.key === key)) {
+        continue
+      }
+
       const methods = Array.isArray(opts.method) ? opts.method : [opts.method]
       for (const method of methods) {
-        const finalPath = path.posix.join(prefix, name, opts.suffix)
-        decorators[method](finalPath, formatedName)(target, key)
+        // Use the existing decorators to register routes
+        decorators[method](opts.suffix, formatedName)(target, key)
       }
     }
   }
