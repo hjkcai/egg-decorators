@@ -90,5 +90,20 @@ describe('egg-decorators', () => {
         .get('/bad')
         .expect(404)
     })
+
+    it('should have correct result if the order of @Route or @Method is wrong', () => {
+      return app.httpRequest()
+        .get('/mistakes/wrong-decorator-ordering')
+        .expect({
+          items: [1, 2],
+          handler: true
+        })
+    })
+
+    it('should have correct result if the path have no leading slash', () => {
+      return app.httpRequest()
+        .get('/mistakes/missing-leading-slash')
+        .expect('missing-leading-slash')
+    })
   })
 })
