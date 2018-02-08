@@ -6,7 +6,7 @@ const ROUTE_TABLE = Symbol('egg-decorator#routeTable')
 
 type HttpMethod = 'get' | 'put' | 'post' | 'patch' | 'delete'
 
-type RouteTable = RouteTableEntry[]
+type RouteTable = Map<string | symbol, RouteTableEntry>
 interface RouteTableEntry {
   key: string,
   method: HttpMethod,
@@ -20,16 +20,16 @@ function generateRouteDecorator (method: HttpMethod) {
     return function RouteDecorator (target: any, key: string) {
       // All routes will be stored in the route table
       // at class.prototype[ROUTE_TABLE]
-      const routeTable: RouteTable = target[ROUTE_TABLE] || (target[ROUTE_TABLE] = [])
+      const routeTable: RouteTable = target[ROUTE_TABLE] || (target[ROUTE_TABLE] = new Map())
 
       // Inject an array at method.middlewares for easier middlewares' modification
       const middlewares = target[key].middlewares || (target[key].middlewares = [])
 
-      if (routeTable.find(x => x.path === path && x.method === method)) {
-        store.app.logger.warn('[egg-decorators]', 'route', method.toUpperCase(), path.toString(), 'is registered multiple times')
+      if (routeTable.has(key)) {
+        store.app.logger.warn('[egg-decorators]', 'You have multiple @Route on', `${target.constructor.name}.${key}`)
+      } else {
+        routeTable.set(key, { key, name, path, method, middlewares })
       }
-
-      routeTable.push({ key, name, path, method, middlewares })
     }
   }
 }
@@ -41,7 +41,7 @@ function RoutesDecoratorFactory (prefix: string = '/'): ClassDecorator {
 
     // Register all routes in the route table into the app before it starts
     app.beforeStart(() => {
-      for (const entry of routeTable) {
+      for (const entry of routeTable.values()) {
         // Get the original middleware from egg
         const baseMiddleware = _.get(app, target.prototype.pathName)[entry.key]
 
