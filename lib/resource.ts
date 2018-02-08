@@ -104,7 +104,7 @@ function ResourceDecoratorFactory (prefix: string = '/', name: string | null = '
     }
 
     // Decorate target with @Routes
-    const namePrefix = name && inflection.pluralize(inflection.dasherize(name))
+    const namePrefix = name && inflection.pluralize(name.split(/\s+/).map(x => inflection.underscore(x)).map(inflection.dasherize).join('-'))
     const finalPrefix = path.join(prefix, namePrefix)
     decorators.Routes(finalPrefix)(target)
   }
