@@ -99,6 +99,10 @@ function ResourceDecoratorFactory (prefix: string = '/', name: string | null = '
         decorators[method](opts.suffix, formatedName)(target, key)
       }
     }
+
+    // Decorate target with @Routes
+    const finalPrefix = path.join(prefix, name)
+    decorators.Routes(finalPrefix)(target)
   }
 }
 
