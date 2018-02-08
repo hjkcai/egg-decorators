@@ -9,7 +9,7 @@ function generateRouteDecorator (method: HttpMethod) {
     return function RouteDecorator (target: any, key: string) {
       // All routes will be stored in the route table
       // at class.prototype[ROUTE_TABLE]
-      const routeTable: RouteTable = target[ROUTE_TABLE] || (target[ROUTE_TABLE] = new Map())
+      const routeTable: RouteTable = target[ROUTE_TABLE] || (target[ROUTE_TABLE] = [])
 
       // Inject an array at method.middlewares for easier middlewares' modification
       const middlewares = target[key].middlewares || (target[key].middlewares = [])
