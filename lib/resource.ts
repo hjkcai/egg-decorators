@@ -107,7 +107,7 @@ function ResourceDecoratorFactory (prefix: string = '/', name: string | null = '
 }
 
 export function Resource (target: Function): void
-export function Resource (prefix?: string, name?: string): ClassDecorator
+export function Resource (prefix?: string, name?: string | null): ClassDecorator
 export function Resource (...args: any[]) {
   if (typeof args[0] === 'function') {
     ResourceDecoratorFactory()(args[0])
