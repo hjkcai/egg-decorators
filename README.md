@@ -5,6 +5,7 @@ Easy-to-use decorators for writing controllers in egg.js.
 * Define routes in together with the controller
 * Per-route middleware via decorators
 * Common middleware for a controller via decorators
+* Zero configuration
 
 ## Quick glance
 
@@ -68,3 +69,21 @@ export default class UserController extends Controller {
   }
 }
 ```
+
+## Installation
+
+1. Install egg-decorator
+
+    ```bash
+    yarn add egg-decorators         # Use yarn
+    npm i egg-decorators --save     # Use npm
+    ```
+
+2. Enable plugin in `config/plugin.js`
+
+    ```javascript
+    exports.decorators = {
+      enable: true,
+      package: 'egg-decorators',
+    }
+    ```
