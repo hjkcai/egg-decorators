@@ -1,6 +1,6 @@
 import { Controller } from 'egg'
+import { Routes, Get } from '../egg-decorators'
 import { GlobalBody, PushItem } from '../lib/middlewares'
-import { Routes, Get, createDecorator } from '../egg-decorators'
 
 @GlobalBody
 @Routes
