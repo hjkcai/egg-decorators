@@ -96,7 +96,7 @@ function ResourceDecoratorFactory (prefix: string = '/', name: string | null = '
       const methods = Array.isArray(opts.method) ? opts.method : [opts.method]
       for (const method of methods) {
         // Use the existing decorators to register routes
-        decorators[method](opts.suffix, formatedName)(target, key)
+        decorators[method](opts.suffix, formatedName)(target.prototype, key)
       }
     }
 
