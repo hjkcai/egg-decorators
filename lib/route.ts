@@ -1,20 +1,9 @@
 import * as _ from 'lodash'
 import * as path from 'path'
 import { store } from './store'
+import { HttpMethod, RouteTable, ROUTE_TABLE } from './def'
 
-const ROUTE_TABLE = Symbol('egg-decorator#routeTable')
-
-type HttpMethod = 'get' | 'put' | 'post' | 'patch' | 'delete'
-
-type RouteTable = Map<string | symbol, RouteTableEntry>
-interface RouteTableEntry {
-  key: string,
-  method: HttpMethod,
-  path: string | RegExp,
-  middlewares: any[],
-  name?: string
-}
-
+/** Create decorators like @Get, @Post, etc. */
 function generateRouteDecorator (method: HttpMethod) {
   return function RouteDecoratorFactory (path: string | RegExp, name?: string) {
     return function RouteDecorator (target: any, key: string) {
@@ -34,6 +23,7 @@ function generateRouteDecorator (method: HttpMethod) {
   }
 }
 
+/** Underlying implementation of @Routes */
 function RoutesDecoratorFactory (prefix: string = '/'): ClassDecorator {
   return function RoutesDecorator (target: any) {
     const { app } = store

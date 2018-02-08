@@ -1,7 +1,4 @@
-import { Context } from 'egg'
-
-export type IMiddleware = (ctx: Context, next: () => Promise<any>) => any
-export type ClassOrPropertyDecorator = (target: any, key?: string | symbol) => any
+import { IMiddleware, ClassOrPropertyDecorator } from './def'
 
 /** Insert a middleware into this route */
 export function Middleware (middleware: IMiddleware): ClassOrPropertyDecorator {
