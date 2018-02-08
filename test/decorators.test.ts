@@ -30,6 +30,62 @@ describe('egg-decorators', () => {
     }
   })
 
+  describe('@Resource', () => {
+    describe('basic functionality', () => {
+      it('index', () => {
+        return app.httpRequest()
+          .get('/resources')
+          .expect('list resources')
+      })
+
+      it('new', () => {
+        return app.httpRequest()
+          .get('/resources/new')
+          .expect('new resource')
+      })
+
+      it('show', () => {
+        return app.httpRequest()
+          .get('/resources/123')
+          .expect('show resource')
+      })
+
+      it('edit', () => {
+        return app.httpRequest()
+          .get('/resources/123/edit')
+          .expect('edit resource')
+      })
+
+      it('create', () => {
+        app.mockCsrf()
+        return app.httpRequest()
+          .post('/resources')
+          .expect('create resource')
+      })
+
+      it('update (put)', () => {
+        app.mockCsrf()
+        return app.httpRequest()
+          .put('/resources/123')
+          .expect('update resource')
+      })
+
+      it('update (patch)', () => {
+        app.mockCsrf()
+        return app.httpRequest()
+          .patch('/resources/123')
+          .expect('update resource')
+      })
+
+      it('destroy', () => {
+        app.mockCsrf()
+        return app.httpRequest()
+          .delete('/resources/123')
+          .expect('destroy resource')
+      })
+    })
+  })
+
   describe('middlewares', () => {
     it('global middlewares', () => {
       return app.httpRequest()
