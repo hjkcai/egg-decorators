@@ -135,7 +135,7 @@ describe('egg-decorators', () => {
         .expect({
           global: true,
           handler: true,
-          ordering: [1, 2, 3, 4, 5]
+          items: [1, 2, 3, 4, 5]
         })
     })
   })
@@ -152,6 +152,7 @@ describe('egg-decorators', () => {
         .get('/mistakes/wrong-decorator-ordering')
         .expect({
           items: [1, 2],
+          global: true,
           handler: true
         })
     })

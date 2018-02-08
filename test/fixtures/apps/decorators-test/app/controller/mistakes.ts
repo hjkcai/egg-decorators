@@ -1,17 +1,8 @@
 import { Controller } from 'egg'
+import { GlobalBody, PushItem } from '../lib/middlewares'
 import { Routes, Get, createDecorator } from '../egg-decorators'
 
-const PushItem = (x: number) => createDecorator((ctx, next) => {
-  ctx.body.items.push(x)
-  return next()
-})
-
-const InitItem = createDecorator((ctx, next) => {
-  ctx.body = { items: [] }
-  return next()
-})
-
-@InitItem
+@GlobalBody
 @Routes
 export default class BadController extends Controller {
   @PushItem(1)
