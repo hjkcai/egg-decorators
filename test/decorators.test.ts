@@ -84,6 +84,57 @@ describe('egg-decorators', () => {
           .expect('destroy resource')
       })
     })
+
+    describe('naming', () => {
+      it('should not augment prefix when name is null', () => {
+        return app.httpRequest()
+          .get('/another/resource/123')
+          .expect(201)
+      })
+
+      it('should accept custom resource name', () => {
+        return app.httpRequest()
+          .get('/custom/resource-packs')
+          .expect('list custom resources')
+      })
+    })
+
+    describe('other usages', () => {
+      it('should accept global middlewares', () => {
+        return app.httpRequest()
+          .get('/another/resource')
+          .expect({
+            global: true,
+            handler: true
+          })
+      })
+
+      it('should accept local middlewares', () => {
+        return app.httpRequest()
+          .get('/another/resource/123')
+          .expect({
+            items: [1],
+            global: true,
+            handler: true
+          })
+      })
+
+      it('should not override user-defined routes', () => {
+        return app.httpRequest()
+          .get('/another/resource/edit')
+          .expect({
+            items: [1],
+            global: true,
+            handler: true
+          })
+      })
+
+      it('should accept custom routes', () => {
+        return app.httpRequest()
+          .get('/custom/resource-packs/route')
+          .expect('custom route')
+      })
+    })
   })
 
   describe('middlewares', () => {
