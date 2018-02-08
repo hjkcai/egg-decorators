@@ -88,8 +88,8 @@ function ResourceDecoratorFactory (prefix: string = '/', name: string | null = '
       }
 
       // Skip if user defines the route manually
-      const routeTable: RouteTable = target.prototype[ROUTE_TABLE]
-      if (routeTable.find(entry => entry.key === key)) {
+      const routeTable: RouteTable | undefined = target.prototype[ROUTE_TABLE]
+      if (routeTable && routeTable.find(entry => entry.key === key)) {
         continue
       }
 
