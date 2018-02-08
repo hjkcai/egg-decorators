@@ -75,16 +75,19 @@ function ResourceDecoratorFactory (prefix: string = '/', name: string | null = '
       if (target.prototype[key] == null) continue
 
       const opts = REST_MAP[key]
-      let formatedName: string
+      let formatedName: string = ''
 
-      if (opts.member) {
-        formatedName = inflection.singularize(name)
-      } else {
-        formatedName = inflection.pluralize(name)
-      }
+      // Give the route a name
+      if (name) {
+        if (opts.member) {
+          formatedName = inflection.singularize(name)
+        } else {
+          formatedName = inflection.pluralize(name)
+        }
 
-      if (opts.namePrefix) {
-        formatedName = opts.namePrefix + formatedName
+        if (opts.namePrefix) {
+          formatedName = opts.namePrefix + formatedName
+        }
       }
 
       // Skip if user defines the route manually
@@ -101,7 +104,8 @@ function ResourceDecoratorFactory (prefix: string = '/', name: string | null = '
     }
 
     // Decorate target with @Routes
-    const finalPrefix = path.join(prefix, inflection.pluralize(inflection.dasherize(name)))
+    const namePrefix = name && inflection.pluralize(inflection.dasherize(name))
+    const finalPrefix = path.join(prefix, namePrefix)
     decorators.Routes(finalPrefix)(target)
   }
 }
