@@ -1,7 +1,7 @@
 {
   "name": "egg-decorators",
   "version": "1.0.0",
-  "description": "Decorators for egg.js",
+  "description": "Easy-to-use decorators for writing controllers in egg.js.",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "eggPlugin": {
@@ -10,7 +10,8 @@
   "keywords": [
     "egg",
     "eggPlugin",
-    "egg-plugin"
+    "egg-plugin",
+    "decorator"
   ],
   "dependencies": {
     "@types/inflection": "^1.5.28",
@@ -40,7 +41,8 @@
   },
   "files": [
     "app.js",
-    "lib/*.js"
+    "lib/*.js",
+    "lib/*.d.ts"
   ],
   "repository": {
     "type": "git",
