@@ -57,6 +57,10 @@
   version "1.2.2"
   resolved "http://registry.npm.taobao.org/@types/http-assert/download/@types/http-assert-1.2.2.tgz#17dfe5a82184a8898935d96fe2eaedd37d22d9a4"
 
+"@types/inflection@^1.5.28":
+  version "1.5.28"
+  resolved "http://registry.npm.taobao.org/@types/inflection/download/@types/inflection-1.5.28.tgz#43d55e0d72cf333a2dffd9c4ec0407455a1b0931"
+
 "@types/keygrip@*":
   version "1.0.1"
   resolved "http://registry.npm.taobao.org/@types/keygrip/download/@types/keygrip-1.0.1.tgz#ff540462d2fb4d0a88441ceaf27d287b01c3d878"
