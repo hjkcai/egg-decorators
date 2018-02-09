@@ -5,7 +5,7 @@ import { HttpMethod, RouteTable, ROUTE_TABLE } from './def'
 
 /** Create decorators like @Get, @Post, etc. */
 function generateRouteDecorator (method: HttpMethod) {
-  return function RouteDecoratorFactory (path: string | RegExp, name?: string) {
+  return function RouteDecoratorFactory (path: string, name?: string) {
     return function RouteDecorator (target: any, key: string) {
       // All routes will be stored in the route table
       // at class.prototype[ROUTE_TABLE]
@@ -14,7 +14,8 @@ function generateRouteDecorator (method: HttpMethod) {
       // Inject an array at method.middlewares for easier middlewares' modification
       const middlewares = target[key].middlewares || (target[key].middlewares = [])
 
-      routeTable.push({ key, name, path, method, middlewares })
+      const fullPath = path
+      routeTable.push({ key, name, path, fullPath, method, middlewares })
     }
   }
 }
@@ -24,6 +25,10 @@ function RoutesDecoratorFactory (prefix: string = '/'): ClassDecorator {
   return function RoutesDecorator (target: any) {
     const { app } = store
     const routeTable: RouteTable = target.prototype[ROUTE_TABLE] || []
+
+    routeTable.forEach(entry => {
+      entry.fullPath = path.posix.join('/', prefix, entry.path)
+    })
 
     // Register all routes in the route table into the app before it starts
     app.beforeStart(() => {
@@ -36,7 +41,7 @@ function RoutesDecoratorFactory (prefix: string = '/'): ClassDecorator {
         const commonMiddlewares = target.middlewares || []
 
         const args: any[] = [
-          path.posix.join('/', prefix, entry.path),
+          entry.fullPath,
           ...commonMiddlewares,
           ...localMiddlewares,
           baseMiddleware

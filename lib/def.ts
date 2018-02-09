@@ -8,7 +8,8 @@ export type RouteTable = RouteTableEntry[]
 export interface RouteTableEntry {
   key: string,
   method: HttpMethod,
-  path: string | RegExp,
+  path: string,
+  fullPath: string,
   middlewares: any[],
   name?: string
 }
