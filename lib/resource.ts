@@ -1,59 +1,7 @@
-// Part of this file is from egg-core@4.4.0/lib/utils/router.js
-
 import * as path from 'path'
 import * as decorators from './route'
 import * as inflection from 'inflection'
-import { RouteTable, ROUTE_TABLE } from './def'
-
-type RestMap = { [key: string]: RestMapEntry }
-interface RestMapEntry {
-  method: string | string[],
-  suffix: string,
-  member?: boolean,
-  namePrefix?: string
-}
-
-const REST_MAP: RestMap = {
-  index: {
-    suffix: '',
-    method: 'Get'
-  },
-  new: {
-    namePrefix: 'new_',
-    member: true,
-    suffix: 'new',
-    method: 'Get'
-  },
-  create: {
-    suffix: '',
-    method: 'Post'
-  },
-  show: {
-    member: true,
-    suffix: ':id',
-    method: 'Get'
-  },
-  edit: {
-    member: true,
-    namePrefix: 'edit_',
-    suffix: ':id/edit',
-    method: 'Get'
-  },
-  update: {
-    member: true,
-    namePrefix: '',
-    suffix: ':id',
-    method: ['Patch', 'Put']
-  },
-  destroy: {
-    member: true,
-    namePrefix: 'destroy_',
-    suffix: ':id',
-    method: 'Delete'
-  }
-}
-
-const LAST_WORD_BLACKLIST = ['controller', 'router', 'routes']
+import { RouteTable, REST_MAP, ROUTE_TABLE, LAST_WORD_BLACKLIST } from './def'
 
 function ResourceDecoratorFactory (prefix: string = '/', name: string | null = ''): ClassDecorator {
   return function ResourceDecorator (target) {
@@ -78,6 +26,7 @@ function ResourceDecoratorFactory (prefix: string = '/', name: string | null = '
       let formatedName: string = ''
 
       // Give the route a name
+      // egg-core@4.4.0/lib/utils/router.js:162
       if (name) {
         if (opts.member) {
           formatedName = inflection.singularize(name)
