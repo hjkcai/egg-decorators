@@ -1528,9 +1528,9 @@ ee-first@1.1.1, ee-first@^1.1.1, ee-first@~1.1.1:
   version "1.1.1"
   resolved "http://registry.npm.taobao.org/ee-first/download/ee-first-1.1.1.tgz#590c61156b0ae2f4f0255732a158b266bc56b21d"
 
-egg-bin@^4.3.7:
+egg-bin@~4.3.7:
   version "4.3.7"
-  resolved "http://registry.npm.taobao.org/egg-bin/download/egg-bin-4.3.7.tgz#125ddca6cabeafe1d22cb06be8d9fde2e270286c"
+  resolved "https://registry.sumian.com/egg-bin/-/egg-bin-4.3.7.tgz#125ddca6cabeafe1d22cb06be8d9fde2e270286c"
   dependencies:
     autod "^3.0.1"
     chalk "^2.3.0"
@@ -1635,9 +1635,9 @@ egg-logrotator@^3.0.0:
     moment "^2.19.3"
     mz "^2.7.0"
 
-egg-mock@^3.14.0:
-  version "3.14.0"
-  resolved "http://registry.npm.taobao.org/egg-mock/download/egg-mock-3.14.0.tgz#a5dcfcd1bca2a767c7d34c611bbf10590260322b"
+egg-mock@~3.14.0:
+  version "3.14.1"
+  resolved "https://registry.sumian.com/egg-mock/-/egg-mock-3.14.1.tgz#4fc7f918ae8af6e567d2b41c11e7a5b0de35b71f"
   dependencies:
     "@types/power-assert" "^1.4.29"
     await-event "^2.1.0"
@@ -1745,9 +1745,9 @@ egg-watcher@^3.0.0:
     sdk-base "^3.3.0"
     wt "^1.1.1"
 
-egg@^2.3.0:
+egg@~2.3.0:
   version "2.3.0"
-  resolved "http://registry.npm.taobao.org/egg/download/egg-2.3.0.tgz#98e796e0ece534cc3a70d7026ff47d0f5d7dcda0"
+  resolved "https://registry.sumian.com/egg/-/egg-2.3.0.tgz#98e796e0ece534cc3a70d7026ff47d0f5d7dcda0"
   dependencies:
     "@types/accepts" "^1.3.3"
     "@types/koa" "^2.0.40"
@@ -4014,9 +4014,13 @@ trim-right@^1.0.1:
   version "1.0.1"
   resolved "http://registry.npm.taobao.org/trim-right/download/trim-right-1.0.1.tgz#cb2e1203067e0c8de1f614094b9fe45704ea6003"
 
-tslib@^1.0.0, tslib@^1.8.0, tslib@^1.8.1, tslib@^1.9.0:
+tslib@^1.0.0, tslib@^1.8.0, tslib@^1.8.1:
   version "1.9.0"
   resolved "http://registry.npm.taobao.org/tslib/download/tslib-1.9.0.tgz#e37a86fda8cbbaf23a057f473c9f4dc64e5fc2e8"
+
+tslib@^1.9.0:
+  version "1.9.0"
+  resolved "https://registry.sumian.com/tslib/-/tslib-1.9.0.tgz#e37a86fda8cbbaf23a057f473c9f4dc64e5fc2e8"
 
 tslint-config-standard@^7.0.0:
   version "7.0.0"
@@ -4080,9 +4084,9 @@ type-name@^2.0.0, type-name@^2.0.1:
   version "2.0.2"
   resolved "http://registry.npm.taobao.org/type-name/download/type-name-2.0.2.tgz#efe7d4123d8ac52afff7f40c7e4dec5266008fb4"
 
-typescript@^2.7.1:
-  version "2.7.1"
-  resolved "http://registry.npm.taobao.org/typescript/download/typescript-2.7.1.tgz#bb3682c2c791ac90e7c6210b26478a8da085c359"
+typescript@~2.7.2:
+  version "2.7.2"
+  resolved "https://registry.sumian.com/typescript/-/typescript-2.7.2.tgz#2d615a1ef4aee4f574425cdff7026edf81919836"
 
 uglify-js@^2.6:
   version "2.8.29"
